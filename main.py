@@ -1,12 +1,16 @@
 from web_scraper import CoinMarketCapScraper
+import time
 
-
-if __name__ == "__main__":
+def main():
     scraper = CoinMarketCapScraper(pages=1)  # Scrape first 2 pages
     data = scraper.scrape()
-    #print(data)
-    # scraper.save_to_csv()
+    print(data)
     print("Scraping complete!")
+    time.sleep(3)
+    print("Saving scraped data")
+
+if __name__ == "__main__":
+    main()
 
 
 """

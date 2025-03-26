@@ -60,14 +60,25 @@ class CoinMarketCapScraper:
         # Convert back to list
         cleaned_data = list(unique_entries.values())
 
-        for n_data in cleaned_data:
-            print(f"{n_data}\n")
+        return cleaned_data
+        # for n_data in cleaned_data:
+            # print(f"{n_data}\n")
 
                   
     
     def parse_page(self, html):
         data = self.cut_down_html(html)
         data = self.__remove_redundant_data(data)
+        new_set_data = []
+
+        for dta in data:
+            new_set_data.append(dta.split(","))
+        
+        # for set in new_set_data:
+        #     for field in set:
+        #         print(field)
+
+        return new_set_data
 
     def scrape(self):
         """Run the scraping process for multiple pages."""
@@ -76,14 +87,8 @@ class CoinMarketCapScraper:
             html = self.fetch_page(page)
             #print(html)
             if html:
-                self.parse_page(html)
+                self.coins = self.parse_page(html)
             
             time.sleep(random.uniform(3, 6))  # Avoid getting blocked
 
         return self.coins
-
-    def save_to_csv(self, filename="coinmarketcap_data.csv"):
-        """Save scraped data to a CSV file."""
-        # df = pd.DataFrame(self.coins)
-        # df.to_csv(filename, index=False)
-        print(f"Data saved to {filename}")
