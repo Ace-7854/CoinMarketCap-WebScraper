@@ -1,5 +1,6 @@
 from web_scraper import CoinMarketCapScraper
 import time
+from csv_module import csv_module
 
 def main():
     scraper = CoinMarketCapScraper(pages=1)  # Scrape first 2 pages
@@ -8,6 +9,11 @@ def main():
     print("Scraping complete!")
     time.sleep(3)
     print("Saving scraped data")
+
+    ##need to alter the data so that the list and csv is compatible
+    # i.e. remove the fields
+
+    csv_file = csv_module
 
 if __name__ == "__main__":
     main()
