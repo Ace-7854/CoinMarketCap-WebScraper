@@ -1,7 +1,6 @@
 import requests
-from bs4 import BeautifulSoup
-import time
-import random
+import time, random
+import re
 
 class CoinMarketCapScraper:
     def __init__(self, pages):
@@ -25,7 +24,7 @@ class CoinMarketCapScraper:
             print(f"Error fetching page {page}: {e}")
             return None
 
-    def parse_page(self, html):
+    def cut_down_html(self,html):
         cut_data = html.split('{')
         furth_cut_dt = []
         actual_dta = []
@@ -36,14 +35,39 @@ class CoinMarketCapScraper:
         for data in furth_cut_dt:
             try:    
                 if f"{data[0][0]}{data[0][1]}{data[0][2]}{data[0][3]}{data[0][4]}{data[0][5]}{data[0][6]}" == '"name":':
-                    actual_dta.append(data[0])
+                    actual_dta.append(str(data))
             except Exception as e:
                 print(f"Error found: {e}")
+        
+        #for data in actual_dta:
+        #    print(f"{data}\n")
 
-        for data in actual_dta:
+        return actual_dta
+
+    def __remove_redundant_data(self,data):
+        for i in range(len(data)):
+            data[i] = data[i].strip('[')
+            data[i] = data[i].strip(']')
             
-            print(f"{data}\n")
+        unique_entries = {}
 
+        for entry in data:
+            match = re.search(r'"name":"(.*?)"', entry)  # Extracts name value
+            if match:
+                name = match.group(1)  # BTC, ETH, etc.
+                unique_entries[name] = entry  # Keep latest entry
+
+        # Convert back to list
+        cleaned_data = list(unique_entries.values())
+
+        for n_data in cleaned_data:
+            print(f"{n_data}\n")
+
+                  
+    
+    def parse_page(self, html):
+        data = self.cut_down_html(html)
+        data = self.__remove_redundant_data(data)
 
     def scrape(self):
         """Run the scraping process for multiple pages."""
