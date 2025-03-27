@@ -48,4 +48,3 @@ The extracted data is formatted as follows:
 ---
 
 **Note:** This scraper follows ethical web scraping practices and respects the target site's `robots.txt`. Ensure you comply with CoinMarketCap's terms of service when using this script.
-```
