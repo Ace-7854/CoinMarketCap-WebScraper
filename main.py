@@ -2,18 +2,34 @@ from web_scraper import CoinMarketCapScraper
 import time
 from csv_module import csv_module
 
-def main():
-    scraper = CoinMarketCapScraper(pages=1)  # Scrape first 2 pages
+def display_data(data):
+    # for dta in data:
+        # for d in dta:
+            # print(f"{d}\n")
+    
+    for dta in data:
+        print(f"{dta}\n")
+
+def get_pages():
+    scraper = CoinMarketCapScraper(pages=1)  # Scrape first page
     data = scraper.scrape()
-    print(data)
+    display_data(data)
     print("Scraping complete!")
-    time.sleep(3)
-    print("Saving scraped data")
+
+    return data
+
+def main():
+    """
+    Demo as to how web_Scraper works
+    """
+    data = get_pages()
 
     ##need to alter the data so that the list and csv is compatible
     # i.e. remove the fields
 
-    csv_file = csv_module
+    csv_file = csv_module("CoinMarketCap.csv")
+    csv_file.write_to_file(data)
+
 
 if __name__ == "__main__":
     main()

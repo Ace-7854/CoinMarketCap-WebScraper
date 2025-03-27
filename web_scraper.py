@@ -13,7 +13,7 @@ class CoinMarketCapScraper:
         self.pages = pages
         self.coins = []
 
-    def fetch_page(self, page):
+    def __fetch_page(self, page):
         """Fetch the HTML content of a CoinMarketCap page."""
         url = f"{self.base_url}?page={page}"
         try:
@@ -24,7 +24,7 @@ class CoinMarketCapScraper:
             print(f"Error fetching page {page}: {e}")
             return None
 
-    def cut_down_html(self,html):
+    def __cut_down_html(self,html):
         cut_data = html.split('{')
         furth_cut_dt = []
         actual_dta = []
@@ -64,10 +64,23 @@ class CoinMarketCapScraper:
         # for n_data in cleaned_data:
             # print(f"{n_data}\n")
 
-                  
-    
-    def parse_page(self, html):
-        data = self.cut_down_html(html)
+    def __remove_given_fields(self,nested_list):
+        sanitized_list = []
+        
+        for sublist in nested_list:
+            sanitized_sublist = []
+            for field in sublist:
+                parts = field.split(":", 1)  # Split only once to avoid issues with colons in data
+                if len(parts) == 2:  # Ensure there are two parts (identifier and data)
+                    sanitized_sublist.append(parts[1].strip('"'))  # Remove quotes around data
+                else:
+                    sanitized_sublist.append("")  # Handle malformed data by adding an empty string
+            sanitized_list.append(sanitized_sublist)
+        
+        return sanitized_list
+
+    def __parse_page(self, html):
+        data = self.__cut_down_html(html)
         data = self.__remove_redundant_data(data)
         new_set_data = []
 
@@ -78,16 +91,16 @@ class CoinMarketCapScraper:
         #     for field in set:
         #         print(field)
 
-        return new_set_data
+        return self.__remove_given_fields(new_set_data)
 
     def scrape(self):
         """Run the scraping process for multiple pages."""
         for page in range(1, self.pages + 1):
             print(f"Scraping page {page}...")
-            html = self.fetch_page(page)
+            html = self.__fetch_page(page)
             #print(html)
             if html:
-                self.coins = self.parse_page(html)
+                self.coins = self.__parse_page(html)
             
             time.sleep(random.uniform(3, 6))  # Avoid getting blocked
 
