@@ -28,3 +28,21 @@ class csv_module:
 
         for line in csvFile:
             print(line)
+
+class text_module:
+    def __init__(self, path):
+        self.file = path
+
+    def write_html(self, data):
+        #print(type(data))
+        with open(self.file, 'w') as txt:
+            for ch in data:
+                try:
+                    txt.write(ch)
+                except UnicodeEncodeError:
+                    pass
+            print("DONE")
+            
+    def write_break_down(self,data):
+        with open(self.file, 'w') as txt:
+            txt.writelines(data)

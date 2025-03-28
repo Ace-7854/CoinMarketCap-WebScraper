@@ -1,0 +1,19 @@
+- this is to get coin name:
+"coin-item-name">Bitcoin</"
+- this is to get coin symbol:
+"coin-item-symbol">BTC</"
+- this is to get price:
+<span>$85,206.43</span>
+- this is to get percentage change by the hour:
+"class="icon-Caret-down"" this is for a decrease
+</span>0.06%</span>
+- this is to get pc by 24hrs:
+<span class="icon-Caret-down" style="width:12px;height:18px;display:inline-block"></span>1.98%</span>
+- this is to get pc by 7days:
+<span class="icon-Caret-up" style="width:12px;height:18px;display:inline-block"></span>1.12%</span></td>
+- this is to get volume over 24hrs:
+ color="text" data-sensors-click="true">$30,779,856,686</p></a>
+ - this is to get market cap:
+ <span data-nosnippet="true" class="sc-11478e5d-1 jfwGHx">$1,689,878,576,830</span></p></td>
+ - this is for circulating supply:
+ <div class="circulating-supply-value"><span>19.84M</span> 

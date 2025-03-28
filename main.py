@@ -11,9 +11,9 @@ def display_data(data):
         print(f"{dta}\n")
 
 def get_pages():
-    scraper = CoinMarketCapScraper(pages=1)  # Scrape first page
+    scraper = CoinMarketCapScraper(pages=1) # Scrape first page
     data = scraper.scrape()
-    display_data(data)
+    #display_data(data)
     print("Scraping complete!")
 
     return data
