@@ -2,13 +2,10 @@ from web_scraper import CoinMarketCapScraper
 import time
 from csv_module import csv_module
 
-def display_data(data):
-    # for dta in data:
-        # for d in dta:
-            # print(f"{d}\n")
-    
-    for dta in data:
-        print(f"{dta}\n")
+def display_data(current_data):
+    """Quick method to display data"""
+    for data in current_data:
+                print(f"{data}\n")
 
 def get_pages():
     scraper = CoinMarketCapScraper(pages=1) # Scrape first page
@@ -18,34 +15,24 @@ def get_pages():
 
     return data
 
-def main():
-    """
-    Demo as to how web_Scraper works
-    """
+def update_data():
     data = get_pages()
-
-    ##need to alter the data so that the list and csv is compatible
-    # i.e. remove the fields
 
     csv_file = csv_module("CoinMarketCap.csv")
     csv_file.write_to_file(data)
 
 
+def main():
+    """Demo as to how web_Scraper works"""
+    update_data()
+
+    print("Data collected and saved into CSV, retrieving now!")
+
+    csv_f = csv_module("CoinMarketCap.csv")
+    csv_f.read_from_file()
+    print()
+    print("DATA RETRIEVED")
+
+
 if __name__ == "__main__":
     main()
-
-
-"""
-data looks as follows
-"name":"BTC","price":7.73047897e-10,
-"volume24h":887.5082495477241,"volume7d":6682.982307702676,
-"volume30d":26819.316485477833,"marketCap":7441.478729341666,
-"selfReportedMarketCap":7202.967888891104,"percentChange1h":-0.319568,
-"percentChange24h":-0.849965,"percentChange7d":3.700368,
-"lastUpdated":"2025-03-26T00:43:00.000Z",
-"percentChange30d":-20.786968,"percentChange60d":-40.02053,
-"percentChange90d":-56.930991,"fullyDilluttedMarketCap":655692932.1,
-"marketCapByTotalSupply":7469.4077511842725,"dominance":0.0227,
-"turnover":0.11926504,"ytdPriceChangePercentage":-61.7962,
-"percentChange1y":-72.17571148', ',']
-"""

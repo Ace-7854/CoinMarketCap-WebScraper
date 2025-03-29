@@ -1,1 +1,11 @@
-Name,Abbreviation
+Name,Abbreviation,Price,Circulating Supply
+Bitcoin,BTC,"$84,359.28",19.84M
+Ethereum,ETH,"$1,904.11",120.64M
+Tether,USDT,$0.9996,144.18B
+XRP,XRP,$2.21,58.2B
+BNB,BNB,$622.23,142.47M
+Solana,SOL,$130.10,512.02M
+USDC,USDC,$1.00,60.26B
+Dogecoin,DOGE,$0.1817,148.62B
+Cardano,ADA,$0.7100,35.24B
+TRON,TRX,$0.2327,94.99B

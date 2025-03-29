@@ -6,7 +6,7 @@ import csv
 class csv_module:
     def __init__(self,filepath):
         self.file = filepath
-        self.header = ["Name","Abbreviation"]
+        self.header = ["Name", "Abbreviation", "Price", "Circulating Supply"]
     
     def write_to_file(self, data):
         try:
@@ -26,8 +26,8 @@ class csv_module:
         with open(self.file, mode='r') as file:
             csvFile = csv.reader(file)
 
-        for line in csvFile:
-            print(line)
+            for line in csvFile:
+                print(line)
 
 class text_module:
     def __init__(self, path):
